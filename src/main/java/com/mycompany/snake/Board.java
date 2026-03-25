@@ -7,15 +7,19 @@ package com.mycompany.snake;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.Timer;
 
 /**
  *
  * @author luctroort
  */
-public class Board extends javax.swing.JPanel implements DrawSquareInterface{
-    
+public class Board extends javax.swing.JPanel implements DrawSquareInterface {
+
     private Snake snake;
-    
+    private Timer timer;
+
     public static final int NUM_ROW = 30;
     public static final int NUM_COL = 30;
 
@@ -26,8 +30,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface{
         initComponents();
         snake = new Snake(this);
     }
-    
-    
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -36,6 +39,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface{
     }
     
     
+
     public void drawSquare(Graphics g, int row, int col,
             boolean isHead) {
         int x = col * squareWidth();
@@ -54,7 +58,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface{
                 y + squareHeight() - 1,
                 x + squareWidth() - 1, y + 1);
     }
-    
+
     private int squareWidth() {
         return getWidth() / NUM_COL;
     }
@@ -62,7 +66,6 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface{
     private int squareHeight() {
         return getHeight() / NUM_ROW;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
