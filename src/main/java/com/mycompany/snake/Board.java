@@ -12,7 +12,7 @@ import java.awt.Toolkit;
  *
  * @author luctroort
  */
-public class Board extends javax.swing.JPanel {
+public class Board extends javax.swing.JPanel implements DrawSquareInterface{
     
     private Snake snake;
     
@@ -24,7 +24,7 @@ public class Board extends javax.swing.JPanel {
      */
     public Board() {
         initComponents();
-        snake = new Snake();
+        snake = new Snake(this);
     }
     
     
@@ -36,15 +36,11 @@ public class Board extends javax.swing.JPanel {
     }
     
     
-    private void drawSquare(Graphics g, int row, int col,
-            boolean head) {
-        Color colors[] = {
-            new Color(204, 102, 102),
-            new Color(102, 204, 102)
-        };
+    public void drawSquare(Graphics g, int row, int col,
+            boolean isHead) {
         int x = col * squareWidth();
         int y = row * squareHeight();
-        Color color = colors[shape.ordinal()];
+        Color color = isHead ? new Color(204, 102, 102) : new Color(102, 204, 102);
         g.setColor(color);
         g.fillRect(x + 1, y + 1, squareWidth() - 2,
                 squareHeight() - 2);
