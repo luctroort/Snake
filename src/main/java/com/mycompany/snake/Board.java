@@ -7,6 +7,8 @@ package com.mycompany.snake;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.Timer;
@@ -19,26 +21,88 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
 
     private Snake snake;
     private Timer timer;
+    private KeyAdapter keyAdapter;
 
     public static final int NUM_ROW = 30;
     public static final int NUM_COL = 30;
+    public static final int DELTA_TIME = 200;
+
+    class MyKeyAdapter extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    if (snake.getDirection() != Direction.LEFT) {
+                        snake.changeDirection(Direction.RIGHT);
+                    }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    if (snake.getDirection() != Direction.RIGHT) {
+                        snake.changeDirection(Direction.LEFT);
+                    }
+                    break;
+                case KeyEvent.VK_UP:
+                    if (snake.getDirection() != Direction.UP) {
+                        snake.changeDirection(Direction.DOWN);
+                    }
+                    break;
+                case KeyEvent.VK_DOWN:
+                    if (snake.getDirection() != Direction.DOWN) {
+                        snake.changeDirection(Direction.UP);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
     /**
      * Creates new form Board
      */
     public Board() {
         initComponents();
+        keyAdapter = new MyKeyAdapter();
+        setFocusable(true);
+        addKeyListener(keyAdapter);
         snake = new Snake(this);
+        timer = new Timer(DELTA_TIME, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                tick();
+            }
+        });
+        initGame();
+    }
+
+    public void initGame() {
+        timer.start();
+    }
+
+    private void tick() {
+        if (snake.canMove()) {
+            snake.move();
+        } else {
+            //Game over
+        }
+        repaint();
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        paintBorderBoard(g);
         snake.paint(g);
         Toolkit.getDefaultToolkit().sync();
     }
-    
-    
+
+    private void paintBorderBoard(Graphics g) {
+        g.setColor(Color.black);
+        int width = squareWidth() * NUM_COL;
+        int height = squareHeight() * NUM_ROW;
+        g.drawRect(0, 0, width, height);
+    }
 
     public void drawSquare(Graphics g, int row, int col,
             boolean isHead) {

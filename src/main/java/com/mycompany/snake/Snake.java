@@ -17,12 +17,12 @@ public class Snake {
     private List<Node> nodes;
     private Direction direction;
     private DrawSquareInterface drawSquareInterface;
-    
-    
-    private boolean canMove() {
+    private int nodesToGrow;
+
+    public boolean canMove() {
         switch (direction) {
             case UP:
-                if (nodes.getFirst().getRow() -1 >= 0) {
+                if (nodes.getFirst().getRow() - 1 >= 0) {
                     return false;
                 }
                 break;
@@ -45,6 +45,40 @@ public class Snake {
         return true;
     }
 
+    public void move() {
+        int row = nodes.getFirst().getRow();
+        int col = nodes.getFirst().getCol();
+        Node node = null;
+        switch (direction) {
+            case UP:
+                node = new Node(row - 1, col);
+                break;
+            case DOWN:
+                node = new Node(row + 1, col);
+                break;
+            case LEFT:
+                node = new Node(row, col - 1);
+                break;
+            case RIGHT:
+                node = new Node(row, col + 1);
+                break;
+        }
+        nodes.addFirst(node);
+        if (nodesToGrow == 0) {
+            nodes.removeLast();
+        } else {
+            nodesToGrow--;
+        }
+    }
+    
+    public Direction getDirection() {
+        return direction;
+    }
+    
+    public void changeDirection(Direction direction) {
+        this.direction = direction;
+    }
+
     public Snake(DrawSquareInterface drawSquareInterface) {
         nodes = new ArrayList<>();
         direction = Direction.LEFT;
@@ -55,6 +89,7 @@ public class Snake {
             Node node = new Node(row, col + i);
             nodes.add(node);
         }
+        nodesToGrow = 0;
     }
 
     public void paint(Graphics g) {
@@ -66,5 +101,5 @@ public class Snake {
             }
         }
     }
-    
+
 }
