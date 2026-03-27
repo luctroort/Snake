@@ -22,6 +22,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
     private Snake snake;
     private Timer timer;
     private KeyAdapter keyAdapter;
+    private Food food;
 
     public static final int NUM_ROW = 30;
     public static final int NUM_COL = 30;

@@ -25,5 +25,11 @@ public class Node {
         return col;
     }
     
+    public void setRow(int row) {
+        this.row = row;
+    }
     
+    public void setCol(int col) {
+        this.col = col;
+    }
 }
