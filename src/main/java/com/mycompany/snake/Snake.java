@@ -22,12 +22,12 @@ public class Snake {
     private boolean canMove() {
         switch (direction) {
             case UP:
-                if (nodes.getFirst().getRow() -1 < 0) {
+                if (nodes.getFirst().getRow() -1 >= 0) {
                     return false;
                 }
                 break;
             case DOWN:
-                if (nodes.getFirst().getRow() + 1 >= Board.NUM_ROW) {
+                if (nodes.getFirst().getRow() + 1 < Board.NUM_ROW) {
                     return false;
                 }
                 break;
@@ -37,7 +37,7 @@ public class Snake {
                 }
                 break;
             case LEFT:
-                if (nodes.getFirst().getCol() - 1 < 0) {
+                if (nodes.getFirst().getCol() - 1 >= 0) {
                     return false;
                 }
                 break;
