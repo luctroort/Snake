@@ -21,12 +21,16 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
 
     private Snake snake;
     private Timer timer;
+    private Timer specialTimer;
     private KeyAdapter keyAdapter;
     private Food food;
+    private SpecialFood specialFood;
 
     public static final int NUM_ROW = 30;
     public static final int NUM_COL = 30;
     public static final int DELTA_TIME = 200;
+    public static final int MIN_SPECIAL_TIME = 10000;
+    public static final int MAX_SPECIAL_TIME = 30000;
 
     class MyKeyAdapter extends KeyAdapter {
 
@@ -62,30 +66,43 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
      */
     public Board() {
         initComponents();
-        keyAdapter = new MyKeyAdapter();
-        food = new Food(this);
+        keyAdapter = new MyKeyAdapter();        
+        snake = new Snake(this);
+        food = new Food(snake, this);
+        specialFood = new SpecialFood(snake, this);
         setFocusable(true);
         addKeyListener(keyAdapter);
-        snake = new Snake(this);
         timer = new Timer(DELTA_TIME, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 tick();
             }
         });
+        int specialTime = (int) (Math.random() * (MAX_SPECIAL_TIME- MIN_SPECIAL_TIME)) + MIN_SPECIAL_TIME;  
+        specialTimer = new Timer(specialTime, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                specialFood = new SpecialFood(snake, Board.this);
+            }
+        });       
         initGame();
     }
 
     public void initGame() {
         timer.start();
+        specialTimer.start();
     }
 
     private void tick() {
         if (snake.canMove()) {
             snake.move();
-            if (snake.getHead().getRow() == food.getRow() && snake.getHead().getCol() == food.getCol()) {
+            if (snake.eats(food)) {
                 snake.grow(1);
-                food = new Food(this);
+                food = new Food(snake, this);
+            }
+            if (snake.eats(specialFood)) {
+                snake.grow(3);
+                specialFood = new SpecialFood(snake, this);
             }
         } else {
             //Game over
@@ -99,6 +116,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
         paintBorderBoard(g);
         snake.paint(g);
         food.paint(g);
+        specialFood.paint(g);
         Toolkit.getDefaultToolkit().sync();
     }
 

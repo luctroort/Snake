@@ -10,8 +10,9 @@ package com.mycompany.snake;
  */
 public class SpecialFood extends Food{
     
-    public SpecialFood(DrawSquareInterface drawSquareInterface) {
-        super(drawSquareInterface);
+    public SpecialFood(Snake snake, DrawSquareInterface drawSquareInterface) {
+        super(snake, drawSquareInterface);
+        
     }
     
 }

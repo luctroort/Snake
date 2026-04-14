@@ -11,13 +11,28 @@ import javax.swing.JFrame;
  * @author luctroort
  */
 public class Game extends javax.swing.JPanel {
-    
+
     /**
      * Creates new form Game
      */
+    public Game() {
+        initComponents();
+        
+    }
+
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
     public static void main(String[] args) {
-    JFrame frame = new JFrame("Snake Game");
+        JFrame frame = new JFrame("Snake Game");
 
         Game game = new Game();
         frame.add(game);
@@ -26,9 +41,6 @@ public class Game extends javax.swing.JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-}
-    public Game() {
-        initComponents();
     }
 
     /**

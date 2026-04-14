@@ -66,8 +66,11 @@ public class Snake {
         return direction;
     }
     
-    public Node getHead() {
-        return nodes.getFirst();
+    
+    public boolean eats(Food food){
+        int row = nodes.getFirst().getRow();
+        int col = nodes.getFirst().getCol();
+        return (food.getRow() == row && food.getCol()== col);
     }
     
     public void changeDirection(Direction direction) {
@@ -89,6 +92,15 @@ public class Snake {
     
     public void grow(int amount) {
         nodesToGrow += amount;
+    }
+    
+    public boolean contains(Node node) {
+        for (Node n : nodes) {
+            if (node.getRow() == n.getRow() && node.getCol() == n.getCol()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void paint(Graphics g) {

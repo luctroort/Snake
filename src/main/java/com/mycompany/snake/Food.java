@@ -10,22 +10,23 @@ import java.awt.Graphics;
  *
  * @author luctroort
  */
-public class Food extends Node{
-    
+public class Food extends Node {
+
     private DrawSquareInterface drawSquareInterface;
-    
-    public Food(DrawSquareInterface drawSquareInterface) {
+
+    public Food(Snake snake, DrawSquareInterface drawSquareInterface) {
         super(0, 0);
         this.drawSquareInterface = drawSquareInterface;
-        int row = (int) (Math.random() * Board.NUM_ROW);
-        int col = (int) (Math.random() * Board.NUM_COL);
-        setRow(row);
-        setCol(col);
-        
+        do {
+            int row = (int) (Math.random() * Board.NUM_ROW);
+            int col = (int) (Math.random() * Board.NUM_COL);
+            setRow(row);
+            setCol(col);
+        } while (snake.contains(this));
+
     }
-    
-    
-    public void paint (Graphics g) {
+
+    public void paint(Graphics g) {
         drawSquareInterface.drawSquare(g, getRow(), getCol(), true);
     }
 }
