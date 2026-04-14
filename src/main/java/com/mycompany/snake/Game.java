@@ -4,15 +4,29 @@
  */
 package com.mycompany.snake;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author luctroort
  */
 public class Game extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form Game
      */
+    
+    public static void main(String[] args) {
+    JFrame frame = new JFrame("Snake Game");
+
+        Game game = new Game();
+        frame.add(game);
+
+        frame.setSize(600, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+}
     public Game() {
         initComponents();
     }

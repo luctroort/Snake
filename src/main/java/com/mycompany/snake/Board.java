@@ -34,26 +34,24 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                    if (snake.getDirection() != Direction.LEFT) {
-                        snake.changeDirection(Direction.RIGHT);
-                    }
-                    break;
-                case KeyEvent.VK_RIGHT:
                     if (snake.getDirection() != Direction.RIGHT) {
                         snake.changeDirection(Direction.LEFT);
                     }
                     break;
-                case KeyEvent.VK_UP:
-                    if (snake.getDirection() != Direction.UP) {
-                        snake.changeDirection(Direction.DOWN);
+                case KeyEvent.VK_RIGHT:
+                    if (snake.getDirection() != Direction.LEFT) {
+                        snake.changeDirection(Direction.RIGHT);
                     }
                     break;
-                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_UP:
                     if (snake.getDirection() != Direction.DOWN) {
                         snake.changeDirection(Direction.UP);
                     }
                     break;
-                default:
+                case KeyEvent.VK_DOWN:
+                    if (snake.getDirection() != Direction.UP) {
+                        snake.changeDirection(Direction.DOWN);
+                    }
                     break;
             }
         }
@@ -65,6 +63,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
     public Board() {
         initComponents();
         keyAdapter = new MyKeyAdapter();
+        food = new Food(this);
         setFocusable(true);
         addKeyListener(keyAdapter);
         snake = new Snake(this);
@@ -84,6 +83,10 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
     private void tick() {
         if (snake.canMove()) {
             snake.move();
+            if (snake.getHead().getRow() == food.getRow() && snake.getHead().getCol() == food.getCol()) {
+                snake.grow(1);
+                food = new Food(this);
+            }
         } else {
             //Game over
         }
@@ -95,6 +98,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
         super.paintComponent(g);
         paintBorderBoard(g);
         snake.paint(g);
+        food.paint(g);
         Toolkit.getDefaultToolkit().sync();
     }
 

@@ -20,28 +20,19 @@ public class Snake {
     private int nodesToGrow;
 
     public boolean canMove() {
-        switch (direction) {
-            case UP:
-                if (nodes.getFirst().getRow() - 1 >= 0) {
-                    return false;
-                }
-                break;
-            case DOWN:
-                if (nodes.getFirst().getRow() + 1 < Board.NUM_ROW) {
-                    return false;
-                }
-                break;
-            case RIGHT:
-                if (nodes.getFirst().getCol() + 1 < Board.NUM_COL) {
-                    return false;
-                }
-                break;
-            case LEFT:
-                if (nodes.getFirst().getCol() - 1 >= 0) {
-                    return false;
-                }
-                break;
-        }
+        int row = nodes.getFirst().getRow();
+    int col = nodes.getFirst().getCol();
+
+    switch (direction) {
+        case UP:
+            return row - 1 >= 0;
+        case DOWN:
+            return row + 1 < Board.NUM_ROW;
+        case RIGHT:
+            return col + 1 < Board.NUM_COL;
+        case LEFT:
+            return col - 1 >= 0;
+    }
         return true;
     }
 
@@ -75,6 +66,10 @@ public class Snake {
         return direction;
     }
     
+    public Node getHead() {
+        return nodes.getFirst();
+    }
+    
     public void changeDirection(Direction direction) {
         this.direction = direction;
     }
@@ -90,6 +85,10 @@ public class Snake {
             nodes.add(node);
         }
         nodesToGrow = 0;
+    }
+    
+    public void grow(int amount) {
+        nodesToGrow += amount;
     }
 
     public void paint(Graphics g) {
