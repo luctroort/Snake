@@ -25,6 +25,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
     private KeyAdapter keyAdapter;
     private Food food;
     private SpecialFood specialFood;
+    private Incrementer incrementer;
 
     public static final int NUM_ROW = 30;
     public static final int NUM_COL = 30;
@@ -91,6 +92,13 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
     public void initGame() {
         timer.start();
         specialTimer.start();
+        if (incrementer != null) {
+            incrementer.reset();
+        }
+    }
+    
+    public void setIncrementer(Incrementer incrementer) {
+        this.incrementer = incrementer;
     }
 
     private void tick() {
@@ -99,10 +107,12 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
             if (snake.eats(food)) {
                 snake.grow(1);
                 food = new Food(snake, this);
+                incrementer.incrementScore(1);
             }
             if (snake.eats(specialFood)) {
                 snake.grow(3);
                 specialFood = new SpecialFood(snake, this);
+                incrementer.incrementScore(3);
             }
         } else {
             //Game over
