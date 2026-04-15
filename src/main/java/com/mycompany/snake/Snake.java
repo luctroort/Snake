@@ -4,6 +4,10 @@
  */
 package com.mycompany.snake;
 
+import static com.mycompany.snake.Direction.DOWN;
+import static com.mycompany.snake.Direction.LEFT;
+import static com.mycompany.snake.Direction.RIGHT;
+import static com.mycompany.snake.Direction.UP;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +25,37 @@ public class Snake {
 
     public boolean canMove() {
         int row = nodes.getFirst().getRow();
-    int col = nodes.getFirst().getCol();
+        int col = nodes.getFirst().getCol();
+        Node node = null;
+        switch (direction) {
+            case UP:
+                node = new Node(row - 1, col);
+                break;
+            case DOWN:
+                node = new Node(row + 1, col);
+                break;
+            case LEFT:
+                node = new Node(row, col - 1);
+                break;
+            case RIGHT:
+                node = new Node(row, col + 1);
+                break;
+        }
+        if (node.getRow() < 0 || node.getRow() >= Board.NUM_ROW
+                || node.getCol() < 0 || node.getCol() >= Board.NUM_COL || colidesWithItself(node)) {
+            return false;
+        }
 
-    switch (direction) {
-        case UP:
-            return row - 1 >= 0;
-        case DOWN:
-            return row + 1 < Board.NUM_ROW;
-        case RIGHT:
-            return col + 1 < Board.NUM_COL;
-        case LEFT:
-            return col - 1 >= 0;
-    }
         return true;
+    }
+
+    public boolean colidesWithItself(Node nodeX) {
+        for (Node node : nodes) {
+            if (nodeX.getRow() == node.getRow() && nodeX.getCol() == node.getCol()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void move() {
@@ -61,18 +83,17 @@ public class Snake {
             nodesToGrow--;
         }
     }
-    
+
     public Direction getDirection() {
         return direction;
     }
-    
-    
-    public boolean eats(Food food){
+
+    public boolean eats(Food food) {
         int row = nodes.getFirst().getRow();
         int col = nodes.getFirst().getCol();
-        return (food.getRow() == row && food.getCol()== col);
+        return (food.getRow() == row && food.getCol() == col);
     }
-    
+
     public void changeDirection(Direction direction) {
         this.direction = direction;
     }
@@ -89,11 +110,11 @@ public class Snake {
         }
         nodesToGrow = 0;
     }
-    
+
     public void grow(int amount) {
         nodesToGrow += amount;
     }
-    
+
     public boolean contains(Node node) {
         for (Node n : nodes) {
             if (node.getRow() == n.getRow() && node.getCol() == n.getCol()) {

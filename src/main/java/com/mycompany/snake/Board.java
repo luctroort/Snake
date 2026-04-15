@@ -67,7 +67,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
      */
     public Board() {
         initComponents();
-        keyAdapter = new MyKeyAdapter();        
+        keyAdapter = new MyKeyAdapter();
         snake = new Snake(this);
         food = new Food(snake, this);
         specialFood = new SpecialFood(snake, this);
@@ -79,13 +79,13 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
                 tick();
             }
         });
-        int specialTime = (int) (Math.random() * (MAX_SPECIAL_TIME- MIN_SPECIAL_TIME)) + MIN_SPECIAL_TIME;  
+        int specialTime = (int) (Math.random() * (MAX_SPECIAL_TIME - MIN_SPECIAL_TIME)) + MIN_SPECIAL_TIME;
         specialTimer = new Timer(specialTime, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 specialFood = new SpecialFood(snake, Board.this);
             }
-        });       
+        });
         initGame();
     }
 
@@ -96,7 +96,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
             incrementer.reset();
         }
     }
-    
+
     public void setIncrementer(Incrementer incrementer) {
         this.incrementer = incrementer;
     }
