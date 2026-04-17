@@ -61,17 +61,38 @@ public class Game extends javax.swing.JFrame {
         getContentPane().add(board1, java.awt.BorderLayout.CENTER);
 
         jMenuFile.setText("File");
+        jMenuFile.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                jMenuFileMenuDeselected(evt);
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenuFileMenuSelected(evt);
+            }
+        });
 
         jMenuItemRestart.setText("Restart");
         jMenuItemRestart.addActionListener(this::jMenuItemRestartActionPerformed);
         jMenuFile.add(jMenuItemRestart);
 
         jMenuItemExit.setText("Exit");
+        jMenuItemExit.addActionListener(this::jMenuItemExitActionPerformed);
         jMenuFile.add(jMenuItemExit);
 
         jMenuBar1.add(jMenuFile);
 
         jMenuHelp.setText("Help");
+        jMenuHelp.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                jMenuHelpMenuDeselected(evt);
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenuHelpMenuSelected(evt);
+            }
+        });
 
         jMenuItemAbout.setText("About");
         jMenuItemAbout.addActionListener(this::jMenuItemAboutActionPerformed);
@@ -90,7 +111,33 @@ public class Game extends javax.swing.JFrame {
 
     private void jMenuItemRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRestartActionPerformed
         // TODO add your handling code here:
+        board1.initGame();
     }//GEN-LAST:event_jMenuItemRestartActionPerformed
+
+    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemExitActionPerformed
+
+    private void jMenuFileMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuFileMenuSelected
+        // TODO add your handling code here:
+        board1.pause();
+    }//GEN-LAST:event_jMenuFileMenuSelected
+
+    private void jMenuFileMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuFileMenuDeselected
+        // TODO add your handling code here:
+        board1.pause();
+    }//GEN-LAST:event_jMenuFileMenuDeselected
+
+    private void jMenuHelpMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuHelpMenuSelected
+        // TODO add your handling code here:
+        board1.pause();
+    }//GEN-LAST:event_jMenuHelpMenuSelected
+
+    private void jMenuHelpMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuHelpMenuDeselected
+        // TODO add your handling code here:
+        board1.pause();
+    }//GEN-LAST:event_jMenuHelpMenuDeselected
 
     /**
      * @param args the command line arguments

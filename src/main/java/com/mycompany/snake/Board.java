@@ -136,6 +136,14 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
         }
         repaint();
     }
+    
+     public void pause() {
+        if (timer.isRunning()) {
+            timer.stop();
+        } else {
+            timer.start();
+        }
+    }
 
     @Override
     public void paintComponent(Graphics g) {
