@@ -2,16 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.mycompany.snake;
-
-import java.awt.Graphics;
+package com.mycompany.snake.interfaces;
 
 /**
  *
  * @author luctroort
  */
-public interface DrawSquareInterface {
-
-    public void drawSquare(Graphics g, int row, int col,
-            boolean isHead);
+public interface Incrementer {
+    public void incrementScore(int increment);
+    public void reset();
 }

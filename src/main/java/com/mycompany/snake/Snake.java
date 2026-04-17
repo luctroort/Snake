@@ -4,6 +4,7 @@
  */
 package com.mycompany.snake;
 
+import com.mycompany.snake.interfaces.DrawSquareInterface;
 import static com.mycompany.snake.Direction.DOWN;
 import static com.mycompany.snake.Direction.LEFT;
 import static com.mycompany.snake.Direction.RIGHT;

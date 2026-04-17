@@ -4,6 +4,10 @@
  */
 package com.mycompany.snake;
 
+import com.mycompany.snake.interfaces.Incrementer;
+import com.mycompany.snake.interfaces.DrawSquareInterface;
+import com.mycompany.snake.interfaces.GameOverInterface;
+import com.mycompany.snake.interfaces.InitGamer;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -17,7 +21,7 @@ import javax.swing.Timer;
  *
  * @author luctroort
  */
-public class Board extends javax.swing.JPanel implements DrawSquareInterface {
+public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareInterface {
 
     private Snake snake;
     private Timer timer;
@@ -26,6 +30,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
     private Food food;
     private SpecialFood specialFood;
     private Incrementer incrementer;
+    private GameOverInterface gameOverInterface;
 
     public static final int NUM_ROW = 30;
     public static final int NUM_COL = 30;
@@ -90,6 +95,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
     }
 
     public void initGame() {
+        snake = new Snake(this);
         timer.start();
         specialTimer.start();
         if (incrementer != null) {
@@ -99,6 +105,16 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
 
     public void setIncrementer(Incrementer incrementer) {
         this.incrementer = incrementer;
+    }
+
+    public void setGameOverInterface(GameOverInterface gmInterface) {
+        this.gameOverInterface = gmInterface;
+
+    }
+    
+    private void processGameOver() {
+        timer.stop();
+        gameOverInterface.setVisible(this);
     }
 
     private void tick() {
@@ -116,6 +132,7 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
             }
         } else {
             //Game over
+            processGameOver();
         }
         repaint();
     }
@@ -172,6 +189,8 @@ public class Board extends javax.swing.JPanel implements DrawSquareInterface {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setMinimumSize(new java.awt.Dimension(100, 100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

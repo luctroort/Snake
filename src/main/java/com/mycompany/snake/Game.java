@@ -1,36 +1,28 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.snake;
-
-import javax.swing.JFrame;
 
 /**
  *
  * @author luctroort
  */
-public class Game extends javax.swing.JPanel {
+public class Game extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Game.class.getName());
+    GameOver gameOver;
 
     /**
-     * Creates new form Game
+     * Creates new form Game1
      */
     public Game() {
         initComponents();
-        board1.setIncrementer(scoreBoard2);
-        
+        board1.setIncrementer(scoreBoard1);
+        gameOver = new GameOver(this, true);
+        board1.setGameOverInterface(gameOver);
+        gameOver.setInitGamer(board1);
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,44 +33,98 @@ public class Game extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scoreBoard2 = new com.mycompany.snake.ScoreBoard();
+        scoreBoard1 = new com.mycompany.snake.ScoreBoard();
         board1 = new com.mycompany.snake.Board();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuFile = new javax.swing.JMenu();
+        jMenuItemRestart = new javax.swing.JMenuItem();
+        jMenuItemExit = new javax.swing.JMenuItem();
+        jMenuHelp = new javax.swing.JMenu();
+        jMenuItemAbout = new javax.swing.JMenuItem();
 
-        setLayout(new java.awt.BorderLayout());
-        add(scoreBoard2, java.awt.BorderLayout.PAGE_END);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().add(scoreBoard1, java.awt.BorderLayout.PAGE_END);
+
+        board1.setPreferredSize(new java.awt.Dimension(1000, 1000));
 
         javax.swing.GroupLayout board1Layout = new javax.swing.GroupLayout(board1);
         board1.setLayout(board1Layout);
         board1Layout.setHorizontalGroup(
             board1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
         board1Layout.setVerticalGroup(
             board1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
 
-        add(board1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(board1, java.awt.BorderLayout.CENTER);
+
+        jMenuFile.setText("File");
+
+        jMenuItemRestart.setText("Restart");
+        jMenuItemRestart.addActionListener(this::jMenuItemRestartActionPerformed);
+        jMenuFile.add(jMenuItemRestart);
+
+        jMenuItemExit.setText("Exit");
+        jMenuFile.add(jMenuItemExit);
+
+        jMenuBar1.add(jMenuFile);
+
+        jMenuHelp.setText("Help");
+
+        jMenuItemAbout.setText("About");
+        jMenuItemAbout.addActionListener(this::jMenuItemAboutActionPerformed);
+        jMenuHelp.add(jMenuItemAbout);
+
+        jMenuBar1.add(jMenuHelp);
+
+        setJMenuBar(jMenuBar1);
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    
-    
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Snake Game");
+    private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
-        Game game = new Game();
-        frame.add(game);
+    private void jMenuItemRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRestartActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemRestartActionPerformed
 
-        frame.setSize(600, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new Game().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.mycompany.snake.Board board1;
-    private com.mycompany.snake.ScoreBoard scoreBoard2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuHelp;
+    private javax.swing.JMenuItem jMenuItemAbout;
+    private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemRestart;
+    private com.mycompany.snake.ScoreBoard scoreBoard1;
     // End of variables declaration//GEN-END:variables
 }
