@@ -33,6 +33,10 @@ public class Game extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jLabel2 = new javax.swing.JLabel();
         scoreBoard1 = new com.mycompany.snake.ScoreBoard();
         board1 = new com.mycompany.snake.Board();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -41,6 +45,47 @@ public class Game extends javax.swing.JFrame {
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemAbout = new javax.swing.JMenuItem();
+
+        jDialog1.setMinimumSize(new java.awt.Dimension(300, 300));
+        jDialog1.setPreferredSize(new java.awt.Dimension(300, 500));
+
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        jLabel1.setText("SNAKE");
+
+        jToggleButton2.setText("Ok");
+        jToggleButton2.addActionListener(this::jToggleButton2ActionPerformed);
+
+        jLabel2.setText("Lucia Troncho Ortí");
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDialog1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel1)))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jToggleButton2)))
+                .addContainerGap(86, Short.MAX_VALUE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jToggleButton2)
+                .addContainerGap(321, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(scoreBoard1, java.awt.BorderLayout.PAGE_END);
@@ -59,6 +104,8 @@ public class Game extends javax.swing.JFrame {
         );
 
         getContentPane().add(board1, java.awt.BorderLayout.CENTER);
+
+        jMenuBar1.setBackground(new java.awt.Color(242, 242, 242));
 
         jMenuFile.setText("File");
         jMenuFile.addMenuListener(new javax.swing.event.MenuListener() {
@@ -107,6 +154,12 @@ public class Game extends javax.swing.JFrame {
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         // TODO add your handling code here:
+        board1.pause();
+        jDialog1.setLocationRelativeTo(this);
+        jDialog1.setModal(true);
+        jDialog1.setVisible(true);
+        board1.pause();
+        
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jMenuItemRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRestartActionPerformed
@@ -139,6 +192,11 @@ public class Game extends javax.swing.JFrame {
         board1.pause();
     }//GEN-LAST:event_jMenuHelpMenuDeselected
 
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        // TODO add your handling code here:
+        jDialog1.setVisible(false);
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -166,12 +224,16 @@ public class Game extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.mycompany.snake.Board board1;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemRestart;
+    private javax.swing.JToggleButton jToggleButton2;
     private com.mycompany.snake.ScoreBoard scoreBoard1;
     // End of variables declaration//GEN-END:variables
 }
