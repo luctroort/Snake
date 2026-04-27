@@ -4,6 +4,7 @@
  */
 package com.mycompany.snake.interfaces;
 
+import com.mycompany.snake.SquareType;
 import java.awt.Graphics;
 
 /**
@@ -12,6 +13,5 @@ import java.awt.Graphics;
  */
 public interface DrawSquareInterface {
 
-    public void drawSquare(Graphics g, int row, int col,
-            boolean isHead);
+        void drawSquare(Graphics g, int row, int col, SquareType type);
 }

@@ -126,13 +126,16 @@ public class Snake {
     }
 
     public void paint(Graphics g) {
-        boolean first = true;
-        for (Node node : nodes) {
-            drawSquareInterface.drawSquare(g, node.getRow(), node.getCol(), first);
-            if (first) {
-                first = false;
-            }
-        }
+        for (int i = 0; i < nodes.size(); i++) {
+        Node node = nodes.get(i);
+
+        drawSquareInterface.drawSquare(
+            g,
+            node.getRow(),
+            node.getCol(),
+            i == 0 ? SquareType.HEAD : SquareType.BODY
+        );
+    }
     }
 
 }

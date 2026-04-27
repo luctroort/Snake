@@ -13,7 +13,7 @@ import java.awt.Graphics;
  */
 public class Food extends Node {
 
-    private DrawSquareInterface drawSquareInterface;
+    DrawSquareInterface drawSquareInterface;
 
     public Food(Snake snake, DrawSquareInterface drawSquareInterface) {
         super(0, 0);
@@ -28,6 +28,8 @@ public class Food extends Node {
     }
 
     public void paint(Graphics g) {
-        drawSquareInterface.drawSquare(g, getRow(), getCol(), true);
+        drawSquareInterface.drawSquare(g, getRow(), getCol(), SquareType.FOOD);
     }
+    
+    
 }

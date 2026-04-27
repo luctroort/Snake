@@ -5,6 +5,7 @@
 package com.mycompany.snake;
 
 import com.mycompany.snake.interfaces.DrawSquareInterface;
+import java.awt.Graphics;
 
 /**
  *
@@ -17,4 +18,8 @@ public class SpecialFood extends Food{
         
     }
     
+    @Override
+    public void paint(Graphics g) {
+        drawSquareInterface.drawSquare(g, getRow(), getCol(), SquareType.SPECIAL_FOOD);
+    }
 }

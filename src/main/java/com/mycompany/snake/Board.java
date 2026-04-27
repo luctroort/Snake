@@ -31,12 +31,15 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
     private SpecialFood specialFood;
     private Incrementer incrementer;
     private GameOverInterface gameOverInterface;
-
+    private int deltaTime = 200;
+    private String playerName;
+    
     public static final int NUM_ROW = 30;
     public static final int NUM_COL = 30;
-    public static final int DELTA_TIME = 200;
     public static final int MIN_SPECIAL_TIME = 10000;
     public static final int MAX_SPECIAL_TIME = 30000;
+
+    
 
     class MyKeyAdapter extends KeyAdapter {
 
@@ -78,7 +81,7 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
         specialFood = new SpecialFood(snake, this);
         setFocusable(true);
         addKeyListener(keyAdapter);
-        timer = new Timer(DELTA_TIME, new ActionListener() {
+        timer = new Timer(deltaTime, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 tick();
@@ -103,6 +106,18 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
         }
     }
 
+    public void setDeltaTime(int deltaTime) {
+        this.deltaTime = deltaTime;
+    }
+
+    
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+    
+    
+    
     public void setIncrementer(Incrementer incrementer) {
         this.incrementer = incrementer;
     }
@@ -163,10 +178,26 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
     }
 
     public void drawSquare(Graphics g, int row, int col,
-            boolean isHead) {
+            SquareType type) {
         int x = col * squareWidth();
         int y = row * squareHeight();
-        Color color = isHead ? new Color(204, 102, 102) : new Color(102, 204, 102);
+        Color color;
+         switch (type) {
+        case HEAD:
+            color = new Color(204, 102, 102);
+            break;
+        case BODY:
+            color = new Color(102, 204, 102);
+            break;
+        case FOOD:
+            color = Color.BLUE;
+            break;
+        case SPECIAL_FOOD:
+            color = Color.YELLOW;
+            break;
+            default:
+            color = Color.WHITE;
+         }
         g.setColor(color);
         g.fillRect(x + 1, y + 1, squareWidth() - 2,
                 squareHeight() - 2);

@@ -9,7 +9,7 @@ package com.mycompany.snake;
  * @author luctroort
  */
 public class Game extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Game.class.getName());
     GameOver gameOver;
 
@@ -23,6 +23,7 @@ public class Game extends javax.swing.JFrame {
         board1.setGameOverInterface(gameOver);
         gameOver.setInitGamer(board1);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,8 +91,6 @@ public class Game extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(scoreBoard1, java.awt.BorderLayout.PAGE_END);
 
-        board1.setPreferredSize(new java.awt.Dimension(1000, 1000));
-
         javax.swing.GroupLayout board1Layout = new javax.swing.GroupLayout(board1);
         board1.setLayout(board1Layout);
         board1Layout.setHorizontalGroup(
@@ -100,7 +99,7 @@ public class Game extends javax.swing.JFrame {
         );
         board1Layout.setVerticalGroup(
             board1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 604, Short.MAX_VALUE)
         );
 
         getContentPane().add(board1, java.awt.BorderLayout.CENTER);
@@ -159,7 +158,7 @@ public class Game extends javax.swing.JFrame {
         jDialog1.setModal(true);
         jDialog1.setVisible(true);
         board1.pause();
-        
+
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jMenuItemRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRestartActionPerformed
