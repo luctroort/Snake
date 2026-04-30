@@ -30,6 +30,5 @@ public class Food extends Node {
     public void paint(Graphics g) {
         drawSquareInterface.drawSquare(g, getRow(), getCol(), SquareType.FOOD);
     }
-    
-    
+
 }

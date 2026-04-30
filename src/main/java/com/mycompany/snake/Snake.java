@@ -127,15 +127,15 @@ public class Snake {
 
     public void paint(Graphics g) {
         for (int i = 0; i < nodes.size(); i++) {
-        Node node = nodes.get(i);
+            Node node = nodes.get(i);
 
-        drawSquareInterface.drawSquare(
-            g,
-            node.getRow(),
-            node.getCol(),
-            i == 0 ? SquareType.HEAD : SquareType.BODY
-        );
-    }
+            drawSquareInterface.drawSquare(
+                    g,
+                    node.getRow(),
+                    node.getCol(),
+                    i == 0 ? SquareType.HEAD : SquareType.BODY
+            );
+        }
     }
 
 }

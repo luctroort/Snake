@@ -11,15 +11,23 @@ import java.awt.Graphics;
  *
  * @author luctroort
  */
-public class SpecialFood extends Food{
-    
+public class SpecialFood extends Food {
+
+    private boolean visible = true;
+
     public SpecialFood(Snake snake, DrawSquareInterface drawSquareInterface) {
         super(snake, drawSquareInterface);
-        
+
     }
-    
+
+    public void specialFoodAnimation() {
+        visible = !visible;
+    }
+
     @Override
     public void paint(Graphics g) {
-        drawSquareInterface.drawSquare(g, getRow(), getCol(), SquareType.SPECIAL_FOOD);
+        if (visible) {
+            drawSquareInterface.drawSquare(g, getRow(), getCol(), SquareType.SPECIAL_FOOD);
+        }
     }
 }

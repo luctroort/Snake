@@ -24,7 +24,7 @@ public class GameOver extends javax.swing.JDialog implements GameOverInterface {
         super(parent, modal);
         initComponents();
     }
-    
+
     public void setInitGamer(InitGamer initGamer) {
         this.initGamer = initGamer;
     }
@@ -99,7 +99,7 @@ public class GameOver extends javax.swing.JDialog implements GameOverInterface {
 
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
         // TODO add your handling code here:
-                System.exit(0);
+        System.exit(0);
 
     }//GEN-LAST:event_jButtonExitActionPerformed
 

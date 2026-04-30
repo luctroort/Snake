@@ -33,13 +33,11 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
     private GameOverInterface gameOverInterface;
     private int deltaTime = 200;
     private String playerName;
-    
+
     public static final int NUM_ROW = 30;
     public static final int NUM_COL = 30;
     public static final int MIN_SPECIAL_TIME = 10000;
     public static final int MAX_SPECIAL_TIME = 30000;
-
-    
 
     class MyKeyAdapter extends KeyAdapter {
 
@@ -99,7 +97,11 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
 
     public void initGame() {
         snake = new Snake(this);
-        timer.start();
+        if (timer != null) {
+            timer.setDelay(deltaTime);
+            timer.setInitialDelay(0);
+            timer.restart();
+        }
         specialTimer.start();
         if (incrementer != null) {
             incrementer.reset();
@@ -110,14 +112,10 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
         this.deltaTime = deltaTime;
     }
 
-    
-
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-    
-    
-    
+
     public void setIncrementer(Incrementer incrementer) {
         this.incrementer = incrementer;
     }
@@ -126,9 +124,12 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
         this.gameOverInterface = gmInterface;
 
     }
-    
+
     private void processGameOver() {
         timer.stop();
+        if (incrementer != null) {
+            incrementer.saveHighScore();
+        }
         gameOverInterface.setVisible(this);
     }
 
@@ -145,14 +146,17 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
                 specialFood = new SpecialFood(snake, this);
                 incrementer.incrementScore(3);
             }
+            if (specialFood != null) {
+                specialFood.specialFoodAnimation();
+            }
         } else {
             //Game over
             processGameOver();
         }
         repaint();
     }
-    
-     public void pause() {
+
+    public void pause() {
         if (timer.isRunning()) {
             timer.stop();
         } else {
@@ -182,22 +186,22 @@ public class Board extends javax.swing.JPanel implements InitGamer, DrawSquareIn
         int x = col * squareWidth();
         int y = row * squareHeight();
         Color color;
-         switch (type) {
-        case HEAD:
-            color = new Color(204, 102, 102);
-            break;
-        case BODY:
-            color = new Color(102, 204, 102);
-            break;
-        case FOOD:
-            color = Color.BLUE;
-            break;
-        case SPECIAL_FOOD:
-            color = Color.YELLOW;
-            break;
+        switch (type) {
+            case HEAD:
+                color = new Color(204, 102, 102);
+                break;
+            case BODY:
+                color = new Color(102, 204, 102);
+                break;
+            case FOOD:
+                color = Color.BLUE;
+                break;
+            case SPECIAL_FOOD:
+                color = Color.YELLOW;
+                break;
             default:
-            color = Color.WHITE;
-         }
+                color = Color.WHITE;
+        }
         g.setColor(color);
         g.fillRect(x + 1, y + 1, squareWidth() - 2,
                 squareHeight() - 2);

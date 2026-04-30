@@ -18,12 +18,29 @@ public class Game extends javax.swing.JFrame {
      */
     public Game() {
         initComponents();
+        board1.setVisible(false);
+        scoreBoard1.setVisible(false);
+        ConfigPanel config = new ConfigPanel();
+        config.setVisible(true);
+        add(config, java.awt.BorderLayout.NORTH);
+
+    }
+
+    public void startGame(int deltaTime) {
+        getContentPane().removeAll();
+        add(board1, java.awt.BorderLayout.CENTER);
+        add(scoreBoard1, java.awt.BorderLayout.SOUTH);
+        board1.setDeltaTime(deltaTime);
+        board1.setVisible(true);
+        board1.requestFocusInWindow();
+        scoreBoard1.setVisible(true);
         board1.setIncrementer(scoreBoard1);
         gameOver = new GameOver(this, true);
         board1.setGameOverInterface(gameOver);
         gameOver.setInitGamer(board1);
+        board1.initGame();
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,8 +55,8 @@ public class Game extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jToggleButton2 = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
-        scoreBoard1 = new com.mycompany.snake.ScoreBoard();
         board1 = new com.mycompany.snake.Board();
+        scoreBoard1 = new com.mycompany.snake.ScoreBoard();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemRestart = new javax.swing.JMenuItem();
@@ -48,7 +65,6 @@ public class Game extends javax.swing.JFrame {
         jMenuItemAbout = new javax.swing.JMenuItem();
 
         jDialog1.setMinimumSize(new java.awt.Dimension(300, 300));
-        jDialog1.setPreferredSize(new java.awt.Dimension(300, 500));
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel1.setText("SNAKE");
@@ -89,17 +105,21 @@ public class Game extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(scoreBoard1, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout board1Layout = new javax.swing.GroupLayout(board1);
         board1.setLayout(board1Layout);
         board1Layout.setHorizontalGroup(
             board1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(board1Layout.createSequentialGroup()
+                .addGap(258, 258, 258)
+                .addComponent(scoreBoard1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(291, Short.MAX_VALUE))
         );
         board1Layout.setVerticalGroup(
             board1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 604, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, board1Layout.createSequentialGroup()
+                .addGap(0, 604, Short.MAX_VALUE)
+                .addComponent(scoreBoard1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(board1, java.awt.BorderLayout.CENTER);

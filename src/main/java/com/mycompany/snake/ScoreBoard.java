@@ -5,15 +5,20 @@
 package com.mycompany.snake;
 
 import com.mycompany.snake.interfaces.Incrementer;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
  * @author luctroort
  */
-public class ScoreBoard extends javax.swing.JPanel implements Incrementer{
+public class ScoreBoard extends javax.swing.JPanel implements Incrementer {
 
     private int score;
-    
+
     /**
      * Creates new form ScoreBoard
      */
@@ -22,10 +27,30 @@ public class ScoreBoard extends javax.swing.JPanel implements Incrementer{
         score = 0;
         incrementScore(0);
     }
-    
+
     public void incrementScore(int increment) {
         score += increment;
         jLabel1.setText("Score: " + score);
+    }
+
+    public int getHighScore() {
+        try (BufferedReader br = new BufferedReader(new FileReader("highscore.txt"))) {
+            return Integer.parseInt(br.readLine());
+        } catch (IOException | NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    public void saveHighScore() {
+        int currentHighScore = getHighScore();
+        if (score > currentHighScore) {
+            try (PrintWriter out = new PrintWriter(new FileWriter("highscore.txt"))) {
+                out.println(score);
+            } catch (IOException e) {
+                System.err.println("Error guardando record: " + e.getMessage());
+            }
+        }
+
     }
 
     /**
